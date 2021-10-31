@@ -57,13 +57,16 @@
 
 包装类型内存使用 private static class IntegerCache，声明一个内部使用的缓存池
 
-#### 基本类型对应的缓冲池如下
+#### 基本类型对应的缓冲池
 
-- boolean values: true and false
-- all byte values
-- short values: between -128 and 127
-- int values: between -128 and 127
-- char: in the range \u0000 to \u007F
+范围在`一个字节=8bit`内的值会被缓冲到缓冲池中：
+|类型|缓冲池范围|
+|-|-|
+|boolean|true and false|
+|byte values|all byte values|
+|short values|-128 and 127|
+|int|-128 and 127|
+|char|\u0000 to \u007F|
   
 ### String
 
@@ -125,26 +128,26 @@ import static com.xxx.ClassName.*
 
 - 初始化顺序 ：静态变量和静态语句块优先于实例变量和普通语句块，静态变量和静态语句块的初始化顺序取决于它们在代码中顺
 
-        ```java
-        // 1
-        public static String staticField = "静态变量";
-        // 2
-        static {
-            System.out.println("静态语句块");
-        }
-        // 3
-        public String field = "实例变量";
-        // 4
-        {
-            System.out.println("普通语句块");
-        }
+    ```java
+    // 1
+    public static String staticField = "静态变量";
+    // 2
+    static {
+        System.out.println("静态语句块");
+    }
+    // 3
+    public String field = "实例变量";
+    // 4
+    {
+        System.out.println("普通语句块");
+    }
 
-        最后才是构造函数的初始化。
-        // 5
-        public InitialOrderTest() {
-            System.out.println("构造函数");
-        }
-        ```
+    最后才是构造函数的初始化。
+    // 5
+    public InitialOrderTest() {
+        System.out.println("构造函数");
+    }
+    ```
 
 - 存在继承的情况下，初始化顺序为：（静态>普通、父类>子、变量和语句块看顺序）
   - 父类（静态变量、静态语句块）
@@ -254,7 +257,7 @@ Java 的三个访问权限修饰符：private、protected 和 public。
 - 如果`不加访问修饰符`，表示`包级可见`。
 - protected 用于修饰成员，表示在继承体系中成员对于子类可见，但是这个访问修饰符对于类没有意义。
 - private 仅自己可见
-- public 所有均可见  
+- public 所有均可见
 
 private 和 protected 不能修饰类。
 
@@ -273,7 +276,7 @@ private 和 protected 不能修饰类。
 
 ### 抽象类(abstract class)
 
-抽象类和普通类最大的区别是，抽象类不能被实例化，只能被继承。
+抽象类和普通类最大的区别是，`抽象类不能被实例化，只能被继承`。
 
 - 如果一个类中包含抽象方法，那么这个类必须声明为抽象类。
 - 抽象类和抽象方法都使用 abstract 关键字进行声明。
@@ -335,7 +338,7 @@ private 和 protected 不能修饰类。
 
 重载：存在于同一个类中，指一个方法与已经存在的`方法名称上相同`，但是`参数类型、个数、顺序至少有一个不同`。应该注意的是，`返回值不同，其它都相同不算是重载`。
 
-### 比较
+### 两者比较
 
 |区别点 |重载方法 |重写方法|
 |--|--|:--:|
@@ -460,14 +463,20 @@ Java 定义了一套注解，共有7个，3个在`java.lang`中，剩下4个在`
 
 ## 三大特性
 
-- 封装:封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。（setter()，getter()）  
+- 封装:
+
+    封装是指`把一个对象的状态信息（也就是属性）隐藏在对象内部`，不允许外部对象直接访问对象的内部信息。（setter()，getter()）  
   好处：
   1. 良好的封装能够减少耦合。
   2. 类内部的结构可以自由修改。
   3. 可以对成员进行更精确的控制。
   4. 隐藏信息，实现细节。
-- 继承:不同类型的对象，相互之间经常有一定数量的共同点。继承是面向对象最显著的一个特性。继承是从已有的类中派生出新的类，新的类能吸收已有类的数据属性和行为，并能扩展新的能力。关键字（extends）让类与类之间产生继承关系。
-- 多态:表示一个对象具有多种的状态，对象在不同时刻表现出来的不同状态。。具体表现为父类的引用指向子类的实例。  
+- 继承:
+
+    不同类型的对象，相互之间经常有一定数量的共同点。继承是面向对象最显著的一个特性。`继承是从已有的类中派生出新的类，新的类能吸收已有类的数据属性和行为，并能扩展新的能力`。关键字（extends）让类与类之间产生继承关系。
+- 多态:
+
+    表示一个对象具有多种的状态，`对象在不同时刻表现出来的不同状态`。具体表现为父类的引用指向子类的实例。  
     方法的重写Overriding和重载Overloading是Java多态性的不同表现。重写Overriding是父类与子类之间多态性的一种表现，重载Overloading是一个类中多态性的一种表现。
 
 ![三大特征](!pic/../pic/thr-characteristics.png)
@@ -482,7 +491,7 @@ Scanner input = new Scanner(System.in);
 String s  = input.nextLine();
 input.close();
 
-方法 2：通过 BufferedReader
+// 通过 BufferedReader
 BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
 String s = input.readLine();
 ```

@@ -1,7 +1,12 @@
+# java集合
+
 ## java集合架构
+
 ![集合框架](!pic/../pic/collection.png)
 集合主要分为两大类，一个实现collection接口的，一个是实现了Map接口的。
+
 ### list
+
 | 类型 | 描述 | 说明 |
 |---|:---:|---|
 |ArrayList|Object[]数组|添加元素时使用 ensureCapacityInternal() 方法来保证容量足够，如果不够时，需要使用 grow() 方法进行扩容，新容量的大小为 oldCapacity + (oldCapacity >> 1)，也就是旧容量的 1.5 倍。|
@@ -27,10 +32,12 @@
 |EnumMap|要求键必须来自一个Enum。|--|
 
 ### Set
+
 - HashSet（无序，唯一）: 基于 HashMap 实现的，底层采用 HashMap 来保存元素。HashSet中的元素都存放在HashMap的key上面，而value中的值都是统一的一个固定对象`private static final Object PRESENT = new Object()`;
 - LinkedHashSet：LinkedHashSet 是 HashSet 的子类，并且其内部是通过 LinkedHashMap 来实现的。有点类似于我们之前说的 LinkedHashMap 其内部是基于 HashMap 实现一样，不过还是有一点点区别的。
 - TreeSet（有序，唯一）： 基于TreeMap实现，红黑树(自平衡的排序二叉树)
 
 ### 如何选用集合?
+
 1. 主要根据集合的特点来选用，比如我们需要根据`键值获取到元素值`时就选用 `Map` 接口下的集合，`需要排序时选择 TreeMap`,`不需要排序时就选择 HashMap`,`需要保证线程安全就选用 ConcurrentHashMap`。
 2. 当我们`只需要存放元素值`时，就选择实现`Collection接口的集合`，需要`保证元素唯一`时选择实现`Set接口`的集合比如 TreeSet 或 HashSet，不需要就选择实现 List 接口的比如 ArrayList 或 LinkedList，然后再根据实现这些接口的集合的特点来选用。

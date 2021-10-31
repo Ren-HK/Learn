@@ -17,7 +17,7 @@ AOP是面向切面编程，Java是面向对象编程。
 3. Spring是一个IOC(DI)和AOP容器框架。
 4. Spring的优良特性:
     1. 非侵入式：基于Spring开发的应用中的对象可以不依赖于Spring的API
-    2. 控制反转：IOC——Inversion of Control，指的是将对象的创建权交给Spring去创建。使用Spring之前，对象的创建都是由我们自己在代码中new创建。而使用Spring之后。对象的创建都交给了Spring框架。
+    2. 控制反转：IOC——Inversion of Control，指的是`将对象的创建权交给Spring去创建`。使用Spring之前，对象的创建都是由我们自己在代码中new创建。而使用Spring之后。对象的创建都交给了Spring框架。
     3. 依赖注入：DI——Dependency Injection，是指依赖的对象不需要手动调用setXX方法去设置，而是通过配置赋值。
     4. 面向切面编程：Aspect Oriented Programming——AOP。
     5. 容器：Spring是一个容器，因为它包含并且管理应用对象的生命周期。
@@ -40,7 +40,7 @@ Spring Boot(英文中是“引导”的意思)，是`用来简化Spring应用的
 
 ### ORM简介
 
-用于实现面向对象编程语言里不同类型系统的数据之间的转换：
+用于实现面向对象编程语言里`不同类型系统的数据之间的转换`：
 
 - ORM是`通过使用描述对象和数据库之间映射的元数据，将程序中的对象与关系数据库相互映射`。
 - ORM可以`解决数据库与程序间的异构性`，比如：在Java中我们使用String表示字符串，而Oracle中可使用varchar2，MySQL中可使用varchar，SQLServer可使用nvarchar。
@@ -117,7 +117,6 @@ public class TransactionDemo {
 |原理|是根据类加载器和接口创建代理类（此代理类是接口的实现类，所以必须使用接口 面向接口生成代理）|使用cglib(Code Generation Library)实现动态代理，并不要求委托类必须实现接口。底层采用asm字节码生成框架生成代理类的字节码，对代理对象类的class文件加载进来，通过修改其字节码生成子类来处理。 |
 |区别|java动态代理是利用反射机制生成一个实现代理接口的匿名类，在调用具体方法前调用InvokeHandler来处理。|而cglib动态代理是利用asm开源包，对代理对象类的class文件加载进来，通过修改其字节码生成子类来处理。|
 |缺点|jdk动态代理，必须是面向接口，目标业务类必须实现接口|因为是继承，所以该类或方法最好不要声明成final ，final可以阻止继承和多态。|
-|---|---|---|
 
 #### AOP编程使用
 
@@ -137,7 +136,7 @@ public class TransactionDemo {
 
 ### Spring boot 自动配置的加载流程
 
-1. Spring boot的配置自动加载主要通过@SpringBootApplication 中的 @EnableAutoConfiguration注解实现
+1. Spring boot的配置自动加载主要通过@SpringBootApplication 中的 `@EnableAutoConfiguration注解实现`
 2. 注解中@Import(AutoConfigurationImportSelector.class) 的类。借助@Import的支持，收集和注册特定场景相关的bean定义。
 3. 该AutoConfigurationImportSelector类的getAutoConfigurationEntry方法会扫描所有包下spring-autoconfigure-metadata.properties的属性
 4. 通过@ConditionOn的系列注解并对比过滤符合当前配置的配置项，重新进行config的注解扫描添加需要的bean配置到BenDefinition中
@@ -160,9 +159,9 @@ public class TransactionDemo {
 
 ### BeanFactory和ApplicationContext的区别
 
-BeanFactory：负责配置、创建、管理bean，IOC功能的实现主要就依赖于该接口子类实现。
+BeanFactory：负责`配置、创建、管理bean`，IOC功能的实现主要就依赖于该接口子类实现。
 
-ApplicationContext 是 Spring 应用程序中的中央接口，用于向应用程序提供配置信息。它继承了 BeanFactory 接口，所以 ApplicationContext 包含 BeanFactory 的所有功能以及更多功能。
+ApplicationContext 是 Spring 应用程序中的中央接口，用于向应用程序提供配置信息。`它继承了 BeanFactory 接口，所以 ApplicationContext 包含 BeanFactory 的所有功能以及更多功能`。
 
 `BeanFactory是Spring框架的基础设施，面向Spring本身`；而`ApplicationContext面向使用Spring的开发者`，相比BeanFactory提供了更多面向实际应用的功能，几乎所有场合都可以直接使用ApplicationContext而不是底层的BeanFactory。
 
@@ -225,16 +224,17 @@ public @interface RestController { ... }
        - 再按照成员变量名（userService）作为id继续匹配？userService=ioc.getBean("userService",userService.class);
          1. 找到：装配
          2. 找不到：抛异常
-            - 如果我们将@Autowired的required属性设置为false（@Autowired标注的自动装配的属性默认是一定装配上的）
-               1. 找到就装配
-               2. 找不到就装配null
+  - 如果我们将@Autowired的required属性设置为false（@Autowired标注的自动装配的属性默认是一定装配上的）
+      1. 找到就装配
+      2. 找不到就装配null
 
 - @Resource注解和@Autowired一样，也可以标注在字段或属性的setter方法上，但它默认按名称装配。默认按byName自动注入，也提供按照byType 注入；
 - @Resources按名字，是JDK的，@Autowired按类型，是Spring的。
 - 处理这2个注解的BeanPostProcessor不一样CommonAnnotationBeanPostProcessor是处理@Resource注解的，AutoWiredAnnotationBeanPostProcessor是处理@AutoWired注解的
 
 ```java
-@Autowired() @Qualifier("baseDao")     
+@Autowired() 
+@Qualifier("baseDao")     
 private BaseDao baseDao;    
 
 @Resource(name="baseDao")     
