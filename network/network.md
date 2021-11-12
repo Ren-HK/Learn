@@ -167,7 +167,7 @@ IP层接收由更低层（网络接口层例如以太网设备驱动程序）发
 
 TCP是面向连接的通信协议，通过三次握手建立连接，通讯完成时要拆除连接，由于TCP是面向连接的所以只能用于端到端的通讯。TCP提供的是一种可靠的数据流服务，采用"带重传的肯定确认"技术来实现传输的可靠性。TCP还采用一种称为"滑动窗口"的方式进行流量控制，所谓窗口实际表示接收能力，用以限制发送方的发送速度。
 ![TCP报文](../java/pic/TCP-msg.png)
-其中：SEQ:"sequance"序列号；ACK:"acknowledge"确认号；SYN:"synchronize"请求同步标志；；ACK:"acknowledge"确认标志"；FIN："Finally"结束标志。
+其中：SEQ:"sequance"序列号；ACK:"acknowledge"确认号；SYN:"synchronize"请求同步标志；ACK:"acknowledge"确认标志"；FIN："Finally"结束标志。
 
 ### TCP协议的三次握手和四次挥手
 
@@ -176,7 +176,7 @@ TCP连接建立过程：
 
 - Client端发送连接请求报文；
 - Server段接受连接后回复ACK报文，并为这次连接分配资源；
-- Client端接收到ACK报文后也向Server段发生ACK报文，并分配资源，这样TCP连接就建立了。
+- Client端接收到ACK报文后也向Server段发送ACK报文，并分配资源，这样TCP连接就建立了。
 
 TCP连接断开过程：
 

@@ -28,7 +28,7 @@
 |WeakHashMap|弱键映射，允许设释放射所指对象。被垃圾收集器回收。|--|
 |ConcurrentHashMap|线程安全的Map.|--|
 |IdentityHashMap|使用==代替equals()对“键”进行比较的散列映射。|--|
-|sortedMap|排序的Map，现阶段TreeMap是其唯一实现。|--|
+|SortedMap|排序的Map，现阶段TreeMap是其唯一实现。|--|
 |EnumMap|要求键必须来自一个Enum。|--|
 
 ### Set
